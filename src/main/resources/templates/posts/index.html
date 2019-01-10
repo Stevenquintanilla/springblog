@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials :: head('All Posts')">
+</head>
+<body>
+<table>
+    <h1>All Posts</h1>
+    <th:block th:each="post : ${allPosts}">
+        <tr>
+            <td th:text="${post.title}"></td>
+            <td th:text="${post.body}"></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>
