@@ -6,16 +6,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-
 @Controller
 public class PostController {
-
     private final PostService postService;
 
     public PostController(PostService postService){
         this.postService = postService;
     }
+
 
     @GetMapping("/posts")
     public String postsAllDescription(Model model) {
@@ -40,7 +38,7 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String postsCreateForm(@ModelAttribute Post post) {
-        postService.createOnePost(post);
+        postService.save(post);
         return "redirect:/posts";
     }
 
@@ -53,7 +51,7 @@ public class PostController {
 
     @PostMapping("/posts/{id}/edit")
     public String postsEditForm(@ModelAttribute Post post) {
-        postService.editPost(post);
+        postService.save(post);
         return "redirect:/posts/" + post.getId();
     }
 

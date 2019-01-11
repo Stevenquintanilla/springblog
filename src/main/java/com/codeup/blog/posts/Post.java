@@ -1,9 +1,19 @@
 package com.codeup.blog.posts;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="posts")
 public class Post {
 
+    //You can just remove the length since it defaults to 255 anyway
+    @Column(nullable = false, length= 1000)
     private String body;
+
+    @Column(nullable = false, length= 300)
     private String title;
+
+    @Id @GeneratedValue
     private long id;
 
     public Post(){

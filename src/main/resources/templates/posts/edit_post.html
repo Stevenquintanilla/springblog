@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials::head('Edit Post')">
-</head>
+<head th:replace="partials::head('Edit Post')"></head>
 <body>
-<form action="/posts/{id}/edit" method="post" th:object="${post}">
-    Title:
-    <input th:value="*{title}" />
-    <br />
-    Body:
-    <input th:value="*{body}" />
-    <br />
-    <input type="submit" />
+<main role="main" class="container">
+    <nav th:replace="partials::header"></nav>
+    <nav th:replace="partials::navbar"></nav>
 
-</form>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">New Post</h5>
+            <form class="card-text" th:action="'/posts/' + ${post.id} + '/edit'" method="post" th:object="${post}">
+                Title:
+                <input th:field="*{title}" />
+                <br />
+                Body:
+                <textarea th:field="*{body}" ></textarea>
+                <br />
+                <input value="Edit" type="submit" />
+            </form>
+        </div>
+    </div>
+
+    <div th:replace="partials::footer"></div>
+</main>
+<div th:replace="partials::scripts"></div>
 </body>
+
 </html>

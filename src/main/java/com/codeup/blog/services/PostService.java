@@ -1,43 +1,31 @@
 package com.codeup.blog.services;
 import com.codeup.blog.posts.Post;
+import com.codeup.blog.repositories.PostRepository;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
+
 import java.util.List;
 
 @Service
 public class PostService {
-    private List<Post> posts;
+    private PostRepository postDao;
 
-    public PostService() {
-        posts = new ArrayList<>();
-        createPosts();
+    public PostService(PostRepository postDao){
+        this.postDao = postDao;
     }
 
     public List<Post> allPosts() {
-        return posts;
+        return (List<Post>) postDao.findAll();
     }
 
-    public Post createOnePost(Post post){
-        post.setId(posts.size() + 1);
-        posts.add(post);
-        return post;
+    public Post save(Post post){
+        return postDao.save(post);
     }
 
     public Post getThisPostByID(long id){
-        return posts.get((int) (id - 1));
+        return postDao.findOne(id);
     }
 
-    private void createPosts(){
-        createOnePost(new Post("Post 1", "Lorem blah blah"));
-        createOnePost(new Post("Post 2", "Lorem blah blah"));
-        createOnePost(new Post("Post 3", "Lorem blah blah"));
-        createOnePost(new Post("Post 4", "Lorem blah blah"));
-    }
-
-    public Post editPost(Post post){
-        Post editedPost = posts.get((int) post.getId() -1);
-        editedPost.setTitle(post.getTitle());
-        editedPost.setBody(post.getBody());
-        return editedPost;
+    public void deletePost(Post post){
+        postDao.delete(post.getId());
     }
 }

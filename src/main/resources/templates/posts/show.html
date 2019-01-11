@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials :: head">
-    <title>Show</title>
-</head>
+<head th:replace="partials::head('Show Post')"></head>
 <body>
-<h1>Your post</h1>
-<div th:text="${post.title}"></div>
-<div th:text="${post.body}"></div>
-<div th:text="${post.id}"></div>
+<main role="main" class="container">
+    <nav th:replace="partials::header"></nav>
+    <nav th:replace="partials::navbar"></nav>
 
+        <h1>Your post</h1>
+        <div th:text="${post.title}"></div>
+        <div th:text="${post.body}"></div>
+        <div th:text="${post.id}"></div>
+
+    <div th:replace="partials::footer"></div>
+</main>
+<div th:replace="partials::scripts"></div>
 </body>
+
 </html>

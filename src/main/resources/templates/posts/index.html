@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="partials :: head('All Posts')">
+<head th:replace="partials::head('Index')">
 </head>
 <body>
-<table>
+<main role="main" class="container">
+    <nav th:replace="partials::header"></nav>
+    <nav th:replace="partials::navbar"></nav>
+
+    <table>
     <h1>All Posts</h1>
     <th:block th:each="post : ${allPosts}">
         <tr>
@@ -12,5 +16,10 @@
         </tr>
     </th:block>
 </table>
+
+    <div th:replace="partials::footer"></div>
+</main>
+<div th:replace="partials::scripts"></div>
 </body>
+
 </html>
