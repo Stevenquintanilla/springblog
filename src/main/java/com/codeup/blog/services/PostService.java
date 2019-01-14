@@ -17,7 +17,13 @@ public class PostService {
         return (List<Post>) postDao.findAll();
     }
 
-    public Post save(Post post){
+    public Post create(Post post){
+        postDao.save(post);
+        return post;
+
+    }
+
+    public Post edit(Post post){
         return postDao.save(post);
     }
 
@@ -26,6 +32,6 @@ public class PostService {
     }
 
     public void deletePost(Post post){
-        postDao.delete(post.getId());
+        postDao.delete(post);
     }
 }

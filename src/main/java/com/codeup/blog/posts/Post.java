@@ -1,5 +1,7 @@
 package com.codeup.blog.posts;
 
+import com.codeup.blog.users.User;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,21 +18,27 @@ public class Post {
     @Id @GeneratedValue
     private long id;
 
+    @OneToOne
+    private User owner;
+
+
     public Post(){
 
     }
 
-    public Post(String title, String body){
+    public Post(String title, String body, User owner){
         this.body = body;
         this.title = title;
+        this.owner = owner;
     }
 
-    public Post(String title, String body, long id){
-        this.body = body;
-        this.title = title;
-        this.id = id;
+    public User getOwner() {
+        return owner;
     }
 
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
 
     public String getBody() {
         return body;

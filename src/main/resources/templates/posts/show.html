@@ -11,6 +11,8 @@
         <div th:text="${post.body}"></div>
         <div th:text="${post.id}"></div>
 
+        <div th:text="${post.owner.email}"></div>
+
     <div th:replace="partials::footer"></div>
 </main>
 <div th:replace="partials::scripts"></div>

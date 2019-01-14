@@ -1,19 +1,24 @@
 package com.codeup.blog.controllers;
 
 import com.codeup.blog.posts.Post;
+import com.codeup.blog.repositories.UserRepository;
 import com.codeup.blog.services.PostService;
+import com.codeup.blog.users.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.chrono.JapaneseChronology;
+
 @Controller
 public class PostController {
     private final PostService postService;
+    private UserRepository userDao;
 
-    public PostController(PostService postService){
+    public PostController(PostService postService, UserRepository userDao){
         this.postService = postService;
+        this.userDao = userDao;
     }
-
 
     @GetMapping("/posts")
     public String postsAllDescription(Model model) {
@@ -38,7 +43,7 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String postsCreateForm(@ModelAttribute Post post) {
-        postService.save(post);
+        postService.create(post);
         return "redirect:/posts";
     }
 
@@ -51,8 +56,16 @@ public class PostController {
 
     @PostMapping("/posts/{id}/edit")
     public String postsEditForm(@ModelAttribute Post post) {
-        postService.save(post);
+        postService.edit(post);
         return "redirect:/posts/" + post.getId();
     }
+
+    @PostMapping("/posts/{id}/delete")
+    public String deletePost(@PathVariable int id) {
+        postService.deletePost(postService.getThisPostByID(id));
+        return "redirect:/posts";
+    }
+
+
 
 }
