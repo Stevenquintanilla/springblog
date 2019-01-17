@@ -22,7 +22,7 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User user;
 
-
+    //Adding a comment
     public Post(){
 
     }
