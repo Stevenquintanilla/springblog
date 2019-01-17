@@ -5,6 +5,5 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 public interface PostRepository extends CrudRepository<Post, Long> {
-//    @Query("from Post where post.id=?1")
-//    Post findById(long id);
+
 }

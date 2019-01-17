@@ -18,26 +18,27 @@ public class Post {
     @Id @GeneratedValue
     private long id;
 
-    @OneToOne
-    private User owner;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 
     public Post(){
 
     }
 
-    public Post(String title, String body, User owner){
+    public Post(String title, String body, User user){
         this.body = body;
         this.title = title;
-        this.owner = owner;
+        this.user = user;
     }
 
-    public User getOwner() {
-        return owner;
+    public User getUser() {
+        return user;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getBody() {

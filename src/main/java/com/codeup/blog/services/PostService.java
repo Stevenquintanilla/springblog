@@ -27,7 +27,7 @@ public class PostService {
         return postDao.save(post);
     }
 
-    public Post getThisPostByID(long id){
+    public Post findOne(long id){
         return postDao.findOne(id);
     }
 

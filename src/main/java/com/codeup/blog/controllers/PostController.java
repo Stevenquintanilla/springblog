@@ -23,14 +23,16 @@ public class PostController {
     @GetMapping("/posts")
     public String postsAllDescription(Model model) {
         model.addAttribute("allPosts", postService.allPosts());
+        System.out.println("There are " + userDao.count() + " users");
 //        "The posts index page"
         return "posts/index";
     }
 
     @GetMapping("/posts/{id}")
     public String postsIndividualDescription(@PathVariable long id, Model model) {
-        model.addAttribute("post", postService.getThisPostByID(id));
+        model.addAttribute("post", postService.findOne(id));
         model.addAttribute("id", id);
+        model.addAttribute("user", postService.findOne(id).getUser());
 //        "View the information of an individual post of" + id
         return "posts/show";
     }
@@ -43,13 +45,14 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String postsCreateForm(@ModelAttribute Post post) {
+
         postService.create(post);
         return "redirect:/posts";
     }
 
     @GetMapping("/posts/{id}/edit")
     public String postsViewEditPosts(@PathVariable long id, Model model) {
-        model.addAttribute("post", postService.getThisPostByID(id));
+        model.addAttribute("post", postService.findOne(id));
 //        model.addAttribute("id", id);
         return "posts/edit_post";
     }
@@ -62,7 +65,7 @@ public class PostController {
 
     @PostMapping("/posts/{id}/delete")
     public String deletePost(@PathVariable int id) {
-        postService.deletePost(postService.getThisPostByID(id));
+        postService.deletePost(postService.findOne(id));
         return "redirect:/posts";
     }
 

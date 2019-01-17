@@ -1,6 +1,9 @@
 package com.codeup.blog.users;
 
+import com.codeup.blog.posts.Post;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -9,30 +12,28 @@ public class User {
     @Id @GeneratedValue
     private long id;
 
-    @Column(nullable=false, length = 1000)
+    @Column(nullable=false, length = 1000, unique = true)
     private String username;
 
-    @Column(nullable=false, length = 1000)
+    @Column(nullable=false, length = 1000, unique = true)
     private String email;
 
     @Column(nullable=false, length = 1000)
     private String password;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy= "user")
+    private List<Post> posts;
+
     public User(){
 
     }
 
-    public User(String username, String email, String password){
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
+    public User(User copy){
+        id = copy.id;
+        email = copy.email;
+        username = copy.username;
+        password = copy.password;
 
-    public User(String username, String email, String password, long id){
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.id = id;
     }
 
     public long getId() {

@@ -1,3 +1,4 @@
+Drop DATABASE blog;
 CREATE DATABASE blog;
 
 create user blog_user@localhost identified by "Codeup12!";
