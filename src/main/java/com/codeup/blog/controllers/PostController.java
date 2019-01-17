@@ -19,7 +19,7 @@ public class PostController {
         this.postService = postService;
         this.userDao = userDao;
     }
-
+    //Comment here
     @GetMapping("/posts")
     public String postsAllDescription(Model model) {
         model.addAttribute("allPosts", postService.allPosts());
